@@ -4,6 +4,7 @@ import {
     Switch,
     Route
   } from "react-router-dom";
+import Client from './pages/ClientList';
 import Home from './pages/Home';
 
 export default function Routes(){
@@ -11,6 +12,7 @@ export default function Routes(){
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/cliente" component={Client} />
             </Switch>
         </BrowserRouter>
         
