@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {getClient} from '../services/ClientService';
 import moment from 'moment';
-export default function Client(){
+export default function ClientList(){
 
     const [clients, setClient] = useState([])
     const [clientError, setClientError] = useState('')
