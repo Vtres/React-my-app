@@ -1,10 +1,17 @@
 import React from 'react';
 
-export default function Home(){
-    return(
-        <div className="">
-            <h1>Ola pessoas</h1>
-            <p>ola mundo</p>
+import Localization from './Localization';
+import Sobre from './Sobre';
+import Initial from './Initial';
+
+export default function Home() {
+    return (
+        <div>
+            <Initial />
+            <section>
+                <Sobre />
+                <Localization />
+            </section>
         </div>
     )
 }

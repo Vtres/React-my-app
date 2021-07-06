@@ -8,3 +8,5 @@ npm install --save bootstrap // add boostrap
 npm install react-router-dom // add router
 npm install axios //conection back-end
 npm install moment --save // lida com tempo
+npm i react-iframe
+npm install node-sass

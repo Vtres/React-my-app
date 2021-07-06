@@ -1,0 +1,56 @@
+.style_font{
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.back-color-card{
+    background-color: #e3f2fd !important;
+}
+
+.imagem_perfil{
+    width: 30px;
+    height: auto;
+}
+
+.medium{
+    size: 18rem;
+}
+
+.foto_perfil{
+    width: 30px;
+    height: 30px;
+}
+.foto_dropdawn{
+    width: 20px;
+    height: 20px;
+    margin-right: 0.1rem;
+}
+
+.imagem_pequena{
+    width: 30px;
+    height: 30px;
+}
+
+.inputgrande{
+    width: 100%;
+}
+
+.negrito{
+    font-weight: bold;
+}
+
+.map{
+	margin: 0 auto;
+    height: auto;
+	border:5px solid #e3f2fd;
+}
+
+.bg-custom-image{
+    background-image: url(../images/star.png)!important;
+    height: 100%;
+    width: 100%;
+    border: 0;
+    background-position: top;
+    background-repeat: repeat; 
+    top: -2px;
+}
+

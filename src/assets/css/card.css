@@ -1,0 +1,66 @@
+.row{
+    --bs-gutter-x: 0 !important;
+}
+.card-image{
+	height: 200px!important;
+	object-fit: cover!important
+}
+.receita-borda{
+	max-width: 18rem !important;
+}
+
+.container-fluid{
+    background-color: #e3f2fd;
+    height: 90vh;
+}
+
+.col-12{
+    flex: 0 0 auto;
+    width: 100%;
+    
+}
+
+.info-wrapper{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: 4rem !important;
+}
+.info-circle{
+    color: #FFF;
+    font-weight: bold;
+    background: #353673;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 0 2rem;
+    
+}
+.bg-custom-bigcard{
+    background-image: url(../images/star.png)!important;
+    height: auto;
+    width: 100%;
+    border: 0;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}

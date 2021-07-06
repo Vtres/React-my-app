@@ -1,32 +1,34 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import '../assets/css/style.css'
 
-export default function Navbar(){
-    const [isOpen, setOpen]=useState(false);
+export default function Navbar() {
+    const [isOpen, setOpen] = useState(false);
 
-    const handleToggle = () =>{
+    const handleToggle = () => {
         setOpen(!isOpen)
     }
 
-    return(
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button className="navbar-toggler" type="button" data-toggle="collapse" 
-                data-target="#navbar01" aria-controls="navbar01" aria-expanded="false" 
-                aria-label="Toggle navigation" onClick={handleToggle}
-            >
-                <span className="text-white">Menu</span>
-            </button>
-            <div className={`${isOpen ? 'show': ''} collapse navbar-collapse`} id="navbar01">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                        <NavLink to="/" className="nav-link" onClick={handleToggle}> Home </NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink to="/clientes" className="nav-link" onClick={handleToggle}> Clientes </NavLink>
-                    </li><li className="nav-item">
-                        <NavLink to="/add-cliente" className="nav-link" onClick={handleToggle}> Formulário </NavLink>
-                    </li>
-                </ul>
+    return (
+        
+        <nav className="p-1 bg-custom text-white">
+            <div className="container">
+                <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3" >
+                    <NavLink to="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                        <img src={`${process.env.PUBLIC_URL}/image/oi.png`} width="auto" height="59px" />
+                        {/* <span class="fs-4">EstudeAqui</span> */}
+                    </NavLink>
+                
+                    <ul className="nav nav-pills">
+                        <li className="nav-item">
+                            <NavLink to="/clientes" className="nav-link text-white mt-2" onClick={handleToggle}> Clientes </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/add-cliente" className="nav-link text-white mt-2" onClick={handleToggle}> Entrar/Cadastrar </NavLink>   
+                        </li>
+                        <li className="nav-item"><a href="/#sobre" className="nav-link text-white mt-2">Sobre</a></li>
+                    </ul>
+                </header>
             </div>
         </nav>
     )
