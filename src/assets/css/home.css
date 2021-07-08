@@ -2,10 +2,6 @@
     font-family: 'Fredericka the Great', cursive;
 }
 
-.back-color-card{
-    background-color: #e3f2fd !important;
-}
-
 .imagem_perfil{
     width: 30px;
     height: auto;
@@ -49,8 +45,22 @@
     height: 100%;
     width: 100%;
     border: 0;
-    background-position: top;
+    background-position:top right;
     background-repeat: repeat; 
     top: -2px;
+}
+.card{
+    border: 0px !important;
+}
+
+.card-custom-about{
+    background-color:#c6887e;
+    box-shadow: #e3f2fd;
+    border-radius: 20px;
+    border: solid 1px #e3f2fd;
+}
+
+.card-text{
+    color: #f8e3c6;
 }
 

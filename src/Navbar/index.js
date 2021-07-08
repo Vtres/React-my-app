@@ -27,6 +27,7 @@ export default function Navbar() {
                             <NavLink to="/add-cliente" className="nav-link text-white mt-2" onClick={handleToggle}> Entrar/Cadastrar </NavLink>   
                         </li>
                         <li className="nav-item"><a href="/#sobre" className="nav-link text-white mt-2">Sobre</a></li>
+                        <li className="nav-item"><a href="/#loc" className="nav-link text-white mt-2">Localização</a></li>
                     </ul>
                 </header>
             </div>

@@ -1,0 +1,11 @@
+.cb{
+    background-color: rgb(245, 228, 228);
+}
+.card-editt{
+    border: 3px solid #CCC !important;
+}
+
+.red{
+    color: red;
+    display: block;
+}

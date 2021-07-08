@@ -17,7 +17,10 @@
 .col-12{
     flex: 0 0 auto;
     width: 100%;
-    
+}
+
+.card{
+    border: 0px !important;
 }
 
 .info-wrapper{
@@ -31,8 +34,9 @@
     -ms-flex-pack: center;
     justify-content: center;
     -ms-flex-wrap: wrap;
+    /* margin-top: 4rem !important; */
     flex-wrap: wrap;
-    margin-top: 4rem !important;
+    align-content: center;
 }
 .info-circle{
     color: #FFF;
@@ -54,6 +58,8 @@
     -ms-flex-pack: center;
     justify-content: center;
     margin: 0 2rem;
+    flex-wrap: wrap;
+    align-content: center;
     
 }
 .bg-custom-bigcard{
@@ -63,4 +69,10 @@
     border: 0;
     background-position: bottom right;
     background-repeat: no-repeat;
+}
+
+@media (max-width: 600px){
+    .bg-custom-bigcard{
+        background-position:right;
+    }
 }

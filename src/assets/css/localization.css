@@ -1,0 +1,20 @@
+.bg-img-back{
+    background-image: url(../images/star.png);
+    height: 100%;
+    width: 100%;
+    border: 0;
+    background-position: bottom left;
+    background-repeat: repeat;
+    margin-top: -2px;
+}
+
+.responsive-map{
+    min-height: 300px;
+}
+
+.depoimento{
+    padding-right: 1.5rem!important;
+}
+.card{
+    border: 0px !important;
+}
