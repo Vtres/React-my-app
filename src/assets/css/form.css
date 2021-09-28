@@ -9,3 +9,88 @@
     color: red;
     display: block;
 }
+
+.fas{
+    width: auto;
+    height: 5rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    top: 19px;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+}
+
+.fas:hover{
+    cursor: pointer;
+    padding: .3rem;
+    border:solid 1px rgb(83, 74, 74);
+    border-radius:50px;
+}
+
+.card-form{
+    border:  groove 2px #330977 !important;
+    box-shadow: 10px;
+}
+
+.inline{
+    display: inline;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+}
+
+.card-link{
+    cursor: pointer;
+}
+
+.titleCadastro{
+    color: #330977 !important;;
+}
+
+.titleLogar{
+    width: 8rem;
+    height: 2rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    top: 19px;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+}
+
+.titleLogar:hover{
+    cursor: pointer;
+    border:solid 1px rgb(83, 74, 74);
+    border-radius:50px;
+}
+.form-imputs{
+    width: 100%;
+    margin: 2% 0 !important;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink{
+    transform: translate(14px, -10px) scale(0.75) !important;
+    z-index: 1 !important;
+    background-color: white !important;
+    padding: 0 2%;
+}
+
+.card-body{
+    padding: 0.1rem 1rem 1rem 1rem;
+}
+
+.snackbar > .MuiPaper-root{
+    background-color: #5C6BC0;
+}
+
+.icon-close>.MuiButtonBase-root{
+    color: white !important;
+}
+
+path{
+    stroke: white !important;
+}

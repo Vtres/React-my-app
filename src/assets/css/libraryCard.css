@@ -1,0 +1,19 @@
+.borda{
+    max-width: 18rem !important;
+}
+
+.box-library{
+    padding-left: 90px !important;   
+}
+@media (max-width: 415px) {
+    
+    .box-library{
+        padding-left: 60px !important; 
+    }
+
+    .borda{
+        max-width: 15rem !important;
+    }
+  
+}
+

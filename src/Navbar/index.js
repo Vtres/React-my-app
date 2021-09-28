@@ -15,16 +15,16 @@ export default function Navbar() {
             <div className="container">
                 <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3" >
                     <NavLink to="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                        <img src={`${process.env.PUBLIC_URL}/image/oi.png`} width="auto" height="59px" />
+                        <img alt="EstudeAqui" src={`${process.env.PUBLIC_URL}/image/oi.png`} width="auto" height="59px" />
                         {/* <span class="fs-4">EstudeAqui</span> */}
                     </NavLink>
                 
                     <ul className="nav nav-pills">
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink to="/clientes" className="nav-link text-white mt-2" onClick={handleToggle}> Clientes </NavLink>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
-                            <NavLink to="/add-cliente" className="nav-link text-white mt-2" onClick={handleToggle}> Entrar/Cadastrar </NavLink>   
+                            <NavLink to="/add-cliente" className="nav-link text-white mt-2" onClick={handleToggle} > Entrar/Cadastrar </NavLink>   
                         </li>
                         <li className="nav-item"><a href="/#sobre" className="nav-link text-white mt-2">Sobre</a></li>
                         <li className="nav-item"><a href="/#loc" className="nav-link text-white mt-2">Localização</a></li>

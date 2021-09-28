@@ -18,3 +18,20 @@
 .card{
     border: 0px !important;
 }
+
+.redesSociais{
+    position: relative;
+    float: right;
+    cursor: pointer;
+    top: -12px;
+}
+
+.redesSociais > span {
+    cursor: text;
+}
+
+.icon-custom{
+    width: 0.5rem;
+    margin-right: 0.2rem;
+}
+

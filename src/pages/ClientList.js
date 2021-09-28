@@ -44,9 +44,8 @@ export default function ClientList({ history }) {
                                 </div>
                                 <div className="card-body">
                                     <p>{c.surname}</p>
-
                                     {
-                                        c.nick_name.length > 1 ?
+                                        c.nick_name !== "" ?
                                             <p>NickName: {c.nick_name}</p>
                                             : ''
                                     }

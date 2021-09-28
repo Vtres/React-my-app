@@ -1,0 +1,10 @@
+.cor-perfil{
+    background-color: #f44336 !important;
+    color: #FFF !important;
+}
+
+.absolute{
+    right: 24px !important;
+    bottom: 16px !important;
+    position: fixed !important;
+}

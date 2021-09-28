@@ -1,0 +1,21 @@
+.locationStyle{
+    font-size: 16px;
+    
+    text-decoration: none !important;
+}
+
+.link:hover{
+    text-decoration: none !important;
+    color: #eee !important;
+}
+
+.link{
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.iconNav{
+    width: 15px;
+    height: auto;
+    margin-right: 0.2rem;
+}

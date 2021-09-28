@@ -1,0 +1,26 @@
+.icon-menu{
+    width: 1.8rem;
+    height: auto;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.items-menu-drawer{
+    justify-content: flex-end;
+    display: flex;
+    width: 50%;
+}
+.jss10{
+    flex: 1 1 auto;
+}
+.searchCustom{
+    flex-grow: 0 !important;
+}
+
+.link{
+    color: rgb(107, 102, 102) !important;
+}
+
+.link:hover {
+    text-decoration: none !important;
+   
+}
