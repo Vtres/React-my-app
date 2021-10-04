@@ -20,7 +20,7 @@
     top: 19px;
     position: relative;
     z-index: 2;
-    background-color: white;
+    background-color: #fafafa !important;
 }
 
 .fas:hover{
@@ -59,7 +59,7 @@
     top: 19px;
     position: relative;
     z-index: 2;
-    background-color: white;
+    background-color: #fafafa;
 }
 
 .titleLogar:hover{
@@ -70,12 +70,28 @@
 .form-imputs{
     width: 100%;
     margin: 2% 0 !important;
+    background-color: #fafafa !important;
+}
+
+#email-label{
+    background-color: #fafafa !important;
+}
+#password-label{
+    background-color: #fafafa !important;
+}
+
+#surname-label{
+    background-color: #fafafa !important;
+}
+
+#name-label{
+    background-color: #fafafa !important;
 }
 
 .MuiInputLabel-outlined.MuiInputLabel-shrink{
     transform: translate(14px, -10px) scale(0.75) !important;
     z-index: 1 !important;
-    background-color: white !important;
+    /* background-color: white !important; */
     padding: 0 2%;
 }
 

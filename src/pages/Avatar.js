@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Link from '@material-ui/core/Link';
 
 const StyledBadge = withStyles((theme) => ({
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BadgeAvatars() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    // const history = useHistory();
+    const history = useHistory();
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -61,6 +61,11 @@ export default function BadgeAvatars() {
 
         setAnchorEl(null);
     };
+
+    const exitAplicattion =()=>{
+        localStorage.removeItem('user-token')
+        history.push('/')
+    }
 
     return (
         <div className={classes.root}>
@@ -89,7 +94,7 @@ export default function BadgeAvatars() {
                         </Link>
                     </MenuItem>
                     <MenuItem >
-                        <Link href="/" className='link'>
+                        <Link className='link' onClick={exitAplicattion}>
                             Sair
                         </Link>
                     </MenuItem>

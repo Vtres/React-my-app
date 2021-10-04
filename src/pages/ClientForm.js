@@ -161,7 +161,8 @@ export default function ClientForm() {
                                             </div>
 
                                             <div className="inline">
-                                                <a className="card-link" onClick={onChangeTypeViewLogin}>Cadastre-se</a>
+                                                <a className="card-link" to="/addClient" >Cadastre-se</a>
+                                                {/* onClick={onChangeTypeViewLogin} */}
                                                 <a className="card-link"> Esqueceu a senha? </a>
                                             </div>
 

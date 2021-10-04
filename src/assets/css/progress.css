@@ -1,0 +1,9 @@
+.box-progress{
+    width: 100%;
+    z-index: 2 !important;
+    color: brown !important;
+}
+
+.none{
+    display: none;
+}

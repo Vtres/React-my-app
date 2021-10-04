@@ -24,7 +24,7 @@ export default function Navbar() {
                             <NavLink to="/clientes" className="nav-link text-white mt-2" onClick={handleToggle}> Clientes </NavLink>
                         </li> */}
                         <li className="nav-item">
-                            <NavLink to="/add-cliente" className="nav-link text-white mt-2" onClick={handleToggle} > Entrar/Cadastrar </NavLink>   
+                            <NavLink to="/SignIn" className="nav-link text-white mt-2" onClick={handleToggle} > Entrar/Cadastrar </NavLink>   
                         </li>
                         <li className="nav-item"><a href="/#sobre" className="nav-link text-white mt-2">Sobre</a></li>
                         <li className="nav-item"><a href="/#loc" className="nav-link text-white mt-2">Localização</a></li>
