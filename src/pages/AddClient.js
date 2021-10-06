@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { postClient } from '../services/ClientService'
+// import { postClient } from '../services/ClientService'
 import '../assets/css/form.css';
 import { FaUserCircle } from 'react-icons/fa';
 import Button from '@material-ui/core/Button';
@@ -9,16 +9,17 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import { GrClose } from "react-icons/gr";
 import { NavLink } from 'react-router-dom';
+import { postAddClient } from '../services/AuthService'
+import { Redirect } from 'react-router-dom';
 
 export default function ClientForm() {
     const [open, setOpen] = React.useState(false);
     const history = useHistory();
-    const [typeView, setTypeView] = useState('Login');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setPass] = useState('');
-    const [showButton, setButton] = useState(false);
+    const [message, setMessage] = useState('')
 
     const onChangeName = (event) => {
         setName(event.target.value)
@@ -40,24 +41,21 @@ export default function ClientForm() {
         setOpen(false);
     };
     const toSave = (event) => {
-        setOpen(true);
         event.preventDefault()
         if (name.length <= 0 || surname.length <= 0 || email.length <= 0 || senha.length <= 0) {
-            setButton(true)
+            setOpen(true);
+            setMessage('Dados do cadastro estão inválidos')
         } else {
-            setButton(false)
-            postClient({ name, surname, email, senha })
+            postAddClient({ name, surname, email, senha })
                 .then(res => {
-                    console.log(res)
-                    if (res.name) {
-                        setName('')
-                        setSurname('')
-                        setEmail('')
-                        setPass('')
-                        history.push('/clientes')
-                    }
+                    setOpen(true);
+                    setMessage('Cadastrado com SUCESSO!');
+                    <Redirect to="/SignIn" /> 
                 })
-                .catch(err => console.log(err));
+                .catch(err =>{
+                    setOpen(true);
+                    setMessage('ERRO no cadastro, reveja as informações');
+                });
         }
     }
     return (
@@ -102,13 +100,10 @@ export default function ClientForm() {
                         open={open}
                         autoHideDuration={3000}
                         onClose={handleClose}
-                        message="Usuário Cadastrado"
+                        message={message}
                         className="snackbar"
                         action={
                             <React.Fragment>
-                                <Button className="icon-close" color="#FAFAFA" size="small" onClick={handleClose}>
-                                    Fechar
-                                </Button>
                                 <IconButton size="small" aria-label="close" severity="success" onClick={handleClose}>
                                     <GrClose fontSize="small" />
                                 </IconButton>
