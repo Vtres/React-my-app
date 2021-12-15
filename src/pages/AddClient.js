@@ -50,7 +50,7 @@ export default function ClientForm() {
                 .then(res => {
                     setOpen(true);
                     setMessage('Cadastrado com SUCESSO!');
-                    <Redirect to="/SignIn" /> 
+                    <Redirect to="/singin" /> 
                 })
                 .catch(err =>{
                     setOpen(true);
@@ -86,7 +86,7 @@ export default function ClientForm() {
                             </div>
 
                             <div className="inline">
-                                <NavLink to="/SignIn" className="card-link" > Logar </NavLink>
+                                <NavLink to="/singin" className="card-link" > Logar </NavLink>
                             </div>
                         </div>
 

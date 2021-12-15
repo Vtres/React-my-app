@@ -9,6 +9,10 @@ export default function Navbar() {
         setOpen(!isOpen)
     }
 
+    const doeg = () =>{
+        console.log(localStorage)
+    }
+
     return (
         
         <nav className="p-1 bg-custom text-white">
@@ -20,12 +24,18 @@ export default function Navbar() {
                     </NavLink>
                 
                     <ul className="nav nav-pills">
+                        <NavLink to="/singin" className="nav-link text-white mt-2"  > Entrar/Cadastrar </NavLink>   
+
                         {/* <li className="nav-item">
                             <NavLink to="/clientes" className="nav-link text-white mt-2" onClick={handleToggle}> Clientes </NavLink>
                         </li> */}
-                        <li className="nav-item">
-                            <NavLink to="/SignIn" className="nav-link text-white mt-2" onClick={handleToggle} > Entrar/Cadastrar </NavLink>   
-                        </li>
+                        {/* <li className="nav-item">
+                            {/* <NavLink to="/singin" className="nav-link text-white mt-2"  > Entrar/Cadastrar </NavLink>    */}
+                            {/* {localStorage.getItem('user-token') 
+                                ? <NavLink to="/dashboard" className="nav-link text-white mt-2" onClick={doeg}> Entrar/Cadastrar </NavLink>
+                                : <NavLink to="/singin" className="nav-link text-white mt-2" onClick={doeg}> Entrar/Cadastrar </NavLink>
+                            } */}
+                        {/* </li> */}
                         <li className="nav-item"><a href="/#sobre" className="nav-link text-white mt-2">Sobre</a></li>
                         <li className="nav-item"><a href="/#loc" className="nav-link text-white mt-2">Localização</a></li>
                     </ul>

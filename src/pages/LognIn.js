@@ -7,8 +7,14 @@ import IconButton from '@material-ui/core/IconButton';
 import { GrClose } from "react-icons/gr";
 import { useHistory } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
 import { Redirect } from 'react-router-dom';
 import { checkToken, postSignIn } from '../services/AuthService'
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function LognIn() {
     const [open, setOpen] = React.useState(false);
@@ -16,6 +22,8 @@ export default function LognIn() {
     const [email, setEmail] = useState('');
     const [senha, setPass] = useState('');
     const [message, setMessage] = useState('')
+    const [statusToken, setStatusToken] = useState(false)
+    const [eye, setEye] = useState(false)
 
     const onChangeEmail = (event) => {
         setEmail(event.target.value)
@@ -34,16 +42,21 @@ export default function LognIn() {
             setOpen(true);
             setPass('')
         } else {
-            postSignIn({ email, senha }).then(token => {
-                if (token) {
-                    checkToken(token).then(res => {
+            postSignIn({ email, senha }).then(response => {
+                if (response.data[0]) {
+                    checkToken(response.data[0]).then(res => {
+                        console.log(res)
                         if (res.status) {
-                            localStorage.setItem('user-token', token)
+                            localStorage.setItem('user-token', response.data[0])
+                            localStorage.setItem('user-id', response.data[1])
                             // history.push('/dashboard')
-                            window.location.reload(false); 
+                            reload()
+                            window.location.reload(false);
                         }
                     }).catch(err => {
-                        console.log(err)
+                        console.log(err.response.status)
+                        console.log(err.response.data)
+
                         setMessage('Não foi possível logar')
                         setEmail('')
                         setPass('')
@@ -52,7 +65,8 @@ export default function LognIn() {
                     })
                 }
             }).catch(err => {
-                console.log(err.message)
+                console.log(err.response.status)
+                console.log(err.response.data)
                 setMessage('Email ou Senha Inválidos')
                 setEmail('')
                 setPass('')
@@ -73,67 +87,91 @@ export default function LognIn() {
         setOpen(false);
     };
 
-    const reload = () => {
-        history.push('/dashboard')
-        document.location.reload(true);
+    const onEye = () => {
+        setEye(!eye)
     }
 
-    return((() => {
-        if (localStorage.getItem('user-token')) {
-            return(
-                <Redirect to="/dashboard" />        
-            )
-        } else {
-            return (
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-6 offset-md-3">
-                            <h4 className="text-center mt-3 titleLogar">Logar-se</h4>
-                            <div className="card-form">
-                                <div className="card-body mt-4">
-                                    <form action="">
-                                        <div className="form-group">
-                                            <TextField required variant="outlined" className="form-imputs" id="email" label="Email" value={email} onChange={onChangeEmail} autoFocus/>
-                                        </div>
-                                        <div className="form-group">
-                                            <TextField required variant="outlined" type="password" className="form-imputs" id="password" label="Senha" value={senha} onChange={onChangePass} />
-                                        </div>
-                                    </form>
-                                    <div className="row p-4">
-                                        {/* <button className="btn btn-outline-primary btn-lg" onClick={toSave}>Salvar</button> */}
-                                        <Button variant="contained" color="primary" onClick={toLog}>Logar</Button>
-                                    </div>
+    const reload = () => {
+        history.push('/dashboard')
+        // document.location.reload(true);
+    }
 
-                                    <div className="inline">
-                                        <NavLink to="/addClient" className="card-link" > Cadastre-se </NavLink>
-                                        <NavLink to="/recovery" className="card-link" > Esqueceu a senha? </NavLink>
-                                    </div>
-
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-md-6 offset-md-3">
+                    <h4 className="text-center mt-3 titleLogar">Logar-se</h4>
+                    <div className="card-form">
+                        <div className="card-body mt-4">
+                            <form action="">
+                                <div className="form-group">
+                                    <TextField required variant="outlined" className="form-imputs" id="email" label="Email" value={email} onChange={onChangeEmail} autoFocus />
                                 </div>
+                                <div className="form-group input-group">
+                                    {/* <TextField required variant="outlined" type={eye ? 'text' : 'password'} id="password" label="Senha" value={senha} onChange={onChangePass} /> */}
+                                    <FormControl className="form-imputs" variant="outlined">
+                                    <InputLabel className="label-imput" htmlFor="outlined-adornment-password">Senha</InputLabel>
+                                    <OutlinedInput
+                                        required
+                                        variant="outlined"
+                                        id="password"
+                                        type={eye ? 'text' : 'password'}
+                                        value={senha}
+                                        onChange={onChangePass}
+                                        
+                                        
+                                        label="Senha"
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={onEye}
+                                                    onMouseDown={onEye}
+                                                    edge="end"
+                                                >
+                                                    {eye ? <FaEye /> : < FaEyeSlash />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        
+                                    />
+                                     </FormControl>
+                                    {/* <span className='input-group-text' > </span> */}
+                                </div>
+                            </form>
+                            <div className="row p-4">
+                                {/* <button className="btn btn-outline-primary btn-lg" onClick={toSave}>Salvar</button> */}
+                                <Button variant="contained" color="primary" onClick={toLog}>Logar</Button>
                             </div>
-                            <Snackbar
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                    color: "#5C6BC0",
-                                }}
-                                open={open}
-                                autoHideDuration={3000}
-                                onClose={handleClose}
-                                message={message ? message : 'tudo certo'}
-                                className="snackbar"
-                                action={
-                                    <React.Fragment>
-                                        <IconButton size="small" aria-label="close" severity="success" onClick={handleClose}>
-                                            <GrClose fontSize="small" />
-                                        </IconButton>
-                                    </React.Fragment>
-                                }
-                            />
+
+                            <div className="inline">
+                                <NavLink to="/addClient" className="card-link" > Cadastre-se </NavLink>
+                                <NavLink to="/recovery" className="card-link" > Esqueceu a senha? </NavLink>
+                            </div>
+
                         </div>
                     </div>
+                    <Snackbar
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                            color: "#5C6BC0",
+                        }}
+                        open={open}
+                        autoHideDuration={3000}
+                        onClose={handleClose}
+                        message={message ? message : 'tudo certo'}
+                        className="snackbar"
+                        action={
+                            <React.Fragment>
+                                <IconButton size="small" aria-label="close" severity="success" onClick={handleClose}>
+                                    <GrClose fontSize="small" />
+                                </IconButton>
+                            </React.Fragment>
+                        }
+                    />
                 </div>
-            )
-        }
-    })())
+            </div>
+        </div>
+    )
 }

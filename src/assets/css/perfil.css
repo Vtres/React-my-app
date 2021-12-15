@@ -1,0 +1,9 @@
+.img-perfil{
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    padding: 3% 30px 30px 30px;
+}
+.title-perfil{
+    text-align: center !important;
+}

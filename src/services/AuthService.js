@@ -7,7 +7,8 @@ export const checkToken = async (token) =>{
 
 export const postSignIn = async({email, senha}) =>{
     const response = await ApiAxios.post('/auth/signin',{email,senha})
-    return response.data
+    console.log(response)
+    return response
 }
 
 export const postAddClient = async({name,surname,email,senha}) =>{

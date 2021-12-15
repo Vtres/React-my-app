@@ -59,7 +59,7 @@
     top: 19px;
     position: relative;
     z-index: 2;
-    background-color: #fafafa;
+    background-color: #ffffff;
 }
 
 .titleLogar:hover{
@@ -70,11 +70,15 @@
 .form-imputs{
     width: 100%;
     margin: 2% 0 !important;
-    background-color: #fafafa !important;
+    background-color: #ffffff !important;
+}
+
+.label-imput{
+    background-color: #ffffff !important;
 }
 
 #email-label{
-    background-color: #fafafa !important;
+    background-color: #ffffff !important;
 }
 #password-label{
     background-color: #fafafa !important;

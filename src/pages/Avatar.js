@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -6,6 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useHistory } from "react-router-dom";
 import Link from '@material-ui/core/Link';
+import { NavLink } from 'react-router-dom';
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -53,6 +54,15 @@ export default function BadgeAvatars() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const history = useHistory();
 
+    useEffect(() => {
+        loadAvatar()
+    }, [])
+
+    const loadAvatar = () => {
+        const user_id = localStorage.getItem('user-id')
+        console.log(user_id)// trabalhar aki 
+    }
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -63,8 +73,9 @@ export default function BadgeAvatars() {
     };
 
     const exitAplicattion =()=>{
-        localStorage.removeItem('user-token')
-        history.push('/')
+        console.log('entrei na funcao do avatar')
+        localStorage.setItem('user-token',"false")
+        // history.push('/')
     }
 
     return (
@@ -94,7 +105,8 @@ export default function BadgeAvatars() {
                         </Link>
                     </MenuItem>
                     <MenuItem >
-                        <Link className='link' onClick={exitAplicattion}>
+                        {/* <NavLink to="/" className="link" onClick={exitAplicattion}> Sair </NavLink> */}
+                        <Link href="/" className='link'onClick={exitAplicattion} >
                             Sair
                         </Link>
                     </MenuItem>

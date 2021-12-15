@@ -13,4 +13,4 @@ Este projeto utiliza como base a criação [Create React App](https://github.com
 - npm install react-icons --save // add icons 
 - npm install @material-ui/core // material-ui-core
 - npm install @material-ui/lab // material-ui-lab
-
+- npm install react-file-reader --save // input-file
