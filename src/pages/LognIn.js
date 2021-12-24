@@ -24,7 +24,7 @@ export default function LognIn() {
     const [message, setMessage] = useState('')
     const [statusToken, setStatusToken] = useState(false)
     const [eye, setEye] = useState(false)
-
+    const [signinError, setSigninError] = useState('')
     const onChangeEmail = (event) => {
         setEmail(event.target.value)
     }
@@ -42,36 +42,49 @@ export default function LognIn() {
             setOpen(true);
             setPass('')
         } else {
-            postSignIn({ email, senha }).then(response => {
-                if (response.data[0]) {
-                    checkToken(response.data[0]).then(res => {
-                        console.log(res)
-                        if (res.status) {
-                            localStorage.setItem('user-token', response.data[0])
-                            localStorage.setItem('user-id', response.data[1])
-                            // history.push('/dashboard')
-                            reload()
-                            window.location.reload(false);
-                        }
-                    }).catch(err => {
-                        console.log(err.response.status)
-                        console.log(err.response.data)
-
-                        setMessage('Não foi possível logar')
-                        setEmail('')
-                        setPass('')
-                        setOpen(true);
-
-                    })
+            postSignIn({email, senha}).then(res_1 =>{
+                if(res_1.data[0]){
+                    localStorage.setItem('user-token', res_1.data[0])
+                    localStorage.setItem('user-id', res_1.data[1])
+                    window.location.reload(false);
+                }else{
+                    setSigninError(res_1.signin_error)
+                    setMessage('Email ou Senha Inválidos')
+                    setEmail('')
+                    setPass('')
+                    setOpen(true);
                 }
-            }).catch(err => {
-                console.log(err.response.status)
-                console.log(err.response.data)
-                setMessage('Email ou Senha Inválidos')
-                setEmail('')
-                setPass('')
-                setOpen(true);
-            })
+            }).catch(err=>console.log(err))
+            // postSignIn({ email, senha }).then(response => {
+            //     if (response.data[0]) {
+            //         checkToken(response.data[0]).then(res => {
+            //             console.log(res)
+            //             if (res.status) {
+            //                 localStorage.setItem('user-token', response.data[0])
+            //                 localStorage.setItem('user-id', response.data[1])
+            //                 // history.push('/dashboard')
+            //                 reload()
+            //                 window.location.reload(false);
+            //             }
+            //         }).catch(err => {
+            //             console.log(err.response.status)
+            //             console.log(err.response.data)
+
+            //             setMessage('Não foi possível logar')
+            //             setEmail('')
+            //             setPass('')
+            //             setOpen(true);
+
+            //         })
+            //     }
+            // }).catch(err => {
+            //     console.log(err.response.status)
+            //     console.log(err.response.data)
+            //     setMessage('Email ou Senha Inválidos')
+            //     setEmail('')
+            //     setPass('')
+            //     setOpen(true);
+            // })
             // setTimeout(function () { history.push('/dashboard') }, 2000);
         }
         // setEmailInvaid('error')
@@ -80,6 +93,12 @@ export default function LognIn() {
 
         // history.push('/dashboard')
     };
+
+    const handleKeyDown = (event) =>{
+        if(event.key === 'Enter'){
+            toLog()
+        }
+    }
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -118,7 +137,7 @@ export default function LognIn() {
                                         type={eye ? 'text' : 'password'}
                                         value={senha}
                                         onChange={onChangePass}
-                                        
+                                        onKeyDown={handleKeyDown}
                                         
                                         label="Senha"
                                         endAdornment={

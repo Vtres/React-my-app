@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { styled } from '@material-ui/core/styles';
 import './../assets/css/perfil.css';
 import { Typography } from '@material-ui/core';
+import { getClientById } from '../services/ClientService';
+import moment from 'moment';
+
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -13,10 +16,22 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Perfil({ history }) {
-    const [userName, setUserName] = useState('vinicius tres')
-    const [userDate, setUserDate] = useState('30/06/2021')
-    const [userEmail, setUserEmail] = useState('viniciust98@outlook.com')
-    const [userNickName, setUserNickName] = useState('')
+    const [client, setClient] = useState([])
+    const [clientError, setClientError] = useState('')
+
+    useEffect(() => {
+        loadInfo()
+        
+    }, [])
+
+    const loadInfo = () => {
+        const user_id = localStorage.getItem('user-id')
+        getClientById(user_id)
+            .then(res => {
+                setClient(res);
+                console.log(client);
+            }).catch(err => setClientError(err))
+    }
     return (
         <div className="row pb-3 justify-content-center box-library">
 
@@ -28,10 +43,10 @@ export default function Perfil({ history }) {
                     </Item>
                     <Item className="mt-2">
                         <h4 >Dados pessoais:</h4>
-                        <Typography>Entrou em: {userDate}</Typography>
-                        <Typography>Nome completo: {userName}</Typography>
-                        <Typography>Email cadastrado: {userEmail}</Typography>
-                        <Typography>Nick informado: {userName}</Typography>
+                        <Typography>Entrou em: {moment(client.date).format("DD/MM/YYYY")}</Typography>
+                        <Typography>Nome: {client.name}</Typography>
+                        <Typography>Email cadastrado: {client.email}</Typography>
+                        <Typography>Nome completo informado: {client.name} {client.surname}</Typography>
                     </Item>
                     <Item className="mt-2">
                         <h4 >Informações Extras:</h4>

@@ -16,12 +16,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { GiBookshelf } from "react-icons/gi";
 import Avatar from './Avatar';
-import Tooltip from './Tooltip';
 import '../assets/css/drawer.css';
 import Search from './Search';
 import Notification from './Notification';
 import Box from '@material-ui/core/Box';
-
+import { GoSearch } from "react-icons/go";
+import {MdDashboard,MdSearch,MdForum } from "react-icons/md";
+ 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -154,28 +155,36 @@ export default function MiniDrawer() {
           <Link href="/dashboard" className='link'>
             <ListItem button >
               <ListItemIcon>
-                <GiBookshelf className="icon-menu" title="Salas" />
+                <MdDashboard className="icon-menu" title="DashBoard" />
               </ListItemIcon>
-              <ListItemText primary='Suas salas' />
+              <ListItemText primary='DashBoard' />
             </ListItem>
           </Link>
           {/* item 2 */}
           <Link href="/forum" className='link'>
             <ListItem button >
               <ListItemIcon>
-                <BiChat className="icon-menu" title="Fórum" />
+                <MdForum className="icon-menu" title="Fórum" />
               </ListItemIcon>
               <ListItemText primary='Fórum' />
             </ListItem>
           </Link>
-
+          {/* item 3 */}
+          <Link href="/searchRoom" className='link'>
+            <ListItem button >
+              <ListItemIcon>
+                <GoSearch className="icon-menu" title="Pesquisar Salas" />
+              </ListItemIcon>
+              <ListItemText primary='Pesquisar Salas' />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
 
         <div className={classes.toolbar} />
 
-        <Tooltip />
+        {/* <Tooltip /> */}
       </Box>
 
     </div>

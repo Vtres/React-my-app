@@ -1,6 +1,7 @@
 import ApiAxios from '../API'
 
 export const checkToken = async (token) =>{
+    console.log({token})
     const response = await ApiAxios.post('/auth/check-token',{token})
     return response.data
 }

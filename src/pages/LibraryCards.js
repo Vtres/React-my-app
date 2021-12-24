@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,7 +9,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { MdMenu } from "react-icons/md";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import { MdModeEdit, MdDelete } from "react-icons/md";
 import './../assets/css/libraryCard.css';
+import { clientRoom, deleteClientById, getClient, getClientById } from '../services/ClientService';
+import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -29,272 +32,74 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard() {
   const classes = useStyles();
+  const [room, setRoom] = useState('');
+  const [roomError, setClientError] = useState('')
+
+  useEffect(() => {
+    loadCard()
+  }, [])
+
+  const loadCard = () => {
+    const user_id = localStorage.getItem('user-id')
+    clientRoom(user_id)
+      .then(res => {
+        setRoom(res)
+      })
+      .catch(err => {
+        setClientError(err)
+      })
+  }
 
   return (
     <div className="row pb-3 justify-content-center box-library">
-      <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Descricao do card bem aleatorio pra ver como fica se ficar mt grande, espero q nao quebre o layout, pf GOD
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
-      {/* 2 */}
-      <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-      
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
-      {/* 3 */}
-      <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Descricao
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
-      {/* 4 */}
-      <div className="m-2 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Descricao
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
-      {/* 5 +  */}
-      <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Descricao
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
-      {/* 2 */}
-      <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Descricao
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
-      {/* 3 */}
-      <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Descricao
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
-      {/* 4 */}
-      <div className="m-2 col-12 col-md-4 col-sm-6 borda">
-      <Card className={classes.root}>
-        <CardHeader
-          action={
-            <IconButton aria-label="settings">
-              <BiDotsVerticalRounded />
-            </IconButton>
-          }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          component='img'
-          image={`${process.env.PUBLIC_URL}/image/capa.jpg`}
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Descricao
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <MdMenu />
-          </IconButton>
-          <IconButton aria-label="share">
-            <MdMenu />
-          </IconButton>
-        </CardActions>
-      </Card>
-      </div>
+      {room.length == 0
+        ? (
+          <div className='text-center borda'>
+            <h4>Você não participa de nenhuma Sala</h4>
+          </div>
+        )
+        : room.map(data => (
+          <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda" key={data.room_id}>
+            <Card className={classes.root}>
+              <CardHeader
+                action={
+                  <IconButton aria-label="settings">
+                    <BiDotsVerticalRounded />
+                  </IconButton>
+                }
+                title={data.name}
+                subheader={moment(data.date).format("LLL")}
+              />
+              <CardMedia
+                className={classes.media}
+                component='img'
+                image={data.result ? data.result : `${process.env.PUBLIC_URL}/image/no-image.jpg`}
+                title={data.nome}
+              />
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {data.description_room}
+                </Typography>
+              </CardContent>
+              {data.type == 'D' ? (
+                <CardActions disableSpacing>
+                  <IconButton >
+                    <MdModeEdit />
+                  </IconButton>
+                  <IconButton >
+                    <MdDelete />
+                  </IconButton>
+                </CardActions>
+              ): (
+                <CardActions disableSpacing></CardActions>
+              )}
+
+            </Card>
+          </div>
+
+        ))
+      }
     </div>
-  );
+  )
+
 }

@@ -8,3 +8,16 @@
     bottom: 16px !important;
     position: fixed !important;
 }
+
+.primaryStyle{
+    background-color: #F50057 !important;
+    color:#FFF !important;
+}
+
+.closeModal{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 25px;
+}

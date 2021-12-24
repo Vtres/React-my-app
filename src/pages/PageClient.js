@@ -1,16 +1,16 @@
 import React from 'react';
 
 import Drawer from './Drawer';
-import LibraryCard from './LibraryCards';
-import TooltipRoom from './TooltipRoom'
+import Perfil from './Perfil';
+import TooltipPerfil from './TooltipPerfil'
 
 export default function Dashboard() {
 
     return (
         <div>
             <Drawer />
-            <LibraryCard />
-            <TooltipRoom />
+            <Perfil />
+            <TooltipPerfil />
         </div>
 
     )
