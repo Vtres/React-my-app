@@ -17,18 +17,24 @@ import Recovery from './pages/Recovery'
 import PageClient from './pages/PageClient'
 import PageForum from './pages/PageForum'
 import PageSearch from './pages/PageSearch'
+// import Drawer from './pages/Drawer';
+import PageClass from './pages/PageClass';
+import PageRooms from './pages/PageRooms';
+
 export default function App() {
     return (
         <BrowserRouter>
             <Loading />
+            {/* <Drawer /> */}
             <Switch>
+                
                 <Route exact path="/singin" >
                     {localStorage.getItem('user-token') === "false" || localStorage.getItem('user-token') === null ? <Redirect to="/singin" /> : <Redirect to="/dashboard" />}
                 </Route>
                 <Route exact path="/dashboard" exact={true}><Dashboard />  </Route>
                 {/* <LibraryCard /> */}
                 <Route exact path="/" exact={true}> <Navbar /> <Home /> </Route>
-                <Route exact path="/client-edit"><Navbar /> <ClientEdit /></Route>
+                <Route path="/client-edit"><Navbar /> <ClientEdit /></Route>
                 <Route exact path="/perfil"><PageClient /></Route>
                 <Route exact path="/forum">< PageForum/></Route>
                 <Route exact path="/clientes"><Navbar /> <ClientList /></Route>
@@ -37,11 +43,14 @@ export default function App() {
                 <Route exact path="/addClient"><Navbar /> <AddClient /></Route>
                 <Route exact path="/recovery"><Navbar /> <Recovery /></Route>
                 <Route exact path="/searchRoom" > <PageSearch/> </Route>
+                <Route exact path="/class" > <PageClass/> </Route>
+                <Route exact path="/show-rooms" > <PageRooms/> </Route>
+
+                
                 <Route> <NoMatch /> </Route>
                 
             </Switch>
 
         </BrowserRouter>
-
     )
 }

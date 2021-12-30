@@ -21,3 +21,8 @@
     cursor: pointer;
     font-size: 25px;
 }
+
+.paperStyle{
+    height: 200px;
+    overflow:auto
+}

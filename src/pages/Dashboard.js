@@ -4,7 +4,7 @@ import Drawer from './Drawer';
 import LibraryCard from './LibraryCards';
 import TooltipRoom from './TooltipRoom'
 
-export default function Dashboard() {
+export default function Dashboard({history}) {
 
     return (
         <div>

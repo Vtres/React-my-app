@@ -5,6 +5,24 @@
 .box-library{
     padding-left: 90px !important;   
 }
+
+.box-topic{
+    /* padding-left: 90px !important;   */
+    width: 99%; 
+    /* margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;  */
+}
+
+.action{
+    cursor: pointer;
+}
+.style-font{
+    font-size: 17px !important;
+    color: #262424 !important;
+    box-shadow: inset 1px 1px #262424 !important;
+}
+
 @media (max-width: 415px) {
     
     .box-library{

@@ -15,7 +15,8 @@ import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import { styled } from '@material-ui/core/styles';
-
+import { index, topicCreate } from '../services/TopicService';
+import { create } from '../services/RoomService';
 import { MdClose } from "react-icons/md";
 
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -82,45 +83,100 @@ export default function SimpleTooltips() {
     setInputName(files.fileList[0].name)
   }
   const toSave = (event) => {
+    const topic = []
     event.preventDefault()
-    console.log(room)
-    console.log(description)
-    console.log(inputFileResult)
-    console.log(inputFileName)
+    chipData.map(data => {
+      topic.push(data.name)
+    })
+    // console.log(room)
+    // console.log(description)
+    // console.log(inputFileResult)
+    // console.log(inputFileName)
+
+    const name = room
+    const description_room = description
+    const nome = inputFileName
+    const result = inputFileResult
+    const id_user = localStorage.getItem('user-id')
+    const id_public = true
+    create({name, description_room, nome, result, id_user, id_public, topic})
+      .then(res => {
+        if(res.message == 'OK'){
+          setOpen(false);
+          document.location.reload(true);
+        }
+      })
+      .catch(err => console.log(err))
   }
 
-  const searchTopic = () =>{
+  const searchTopic = () => {
     setOpenModalTopic(true);
   }
 
 
   // Tópicos
-  const [chipData, setChipData] = React.useState([
-    { key: 0, label: 'Angular' },
-    { key: 1, label: 'jQuery' },
-    { key: 2, label: 'Polymer' },
-    { key: 3, label: 'React' },
-    { key: 4, label: 'Vue.js' },
-    { key: 5, label: 'CodeIgniter' },
-    { key: 6, label: 'ReactNative' },
-    { key: 7, label: 'C++' },
-    { key: 8, label: 'Python' },
-
-  ]);
+  const [chipData, setChipData] = React.useState([]);
+  const allTopic = []
+  // { key: 0, label: 'Angular' },
+  // { key: 1, label: 'jQuery' },
+  // { key: 2, label: 'Polymer' },
+  // { key: 3, label: 'React' },
+  // { key: 4, label: 'Vue.js' },
+  // { key: 5, label: 'CodeIgniter' },
+  // { key: 6, label: 'ReactNative' },
+  // { key: 7, label: 'C++' },
+  // { key: 8, label: 'Python' },
 
   const topicDelete = (chipToDelete) => () => {
-    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    setChipData((chips) => chips.filter((chip) => chip.topic_id !== chipToDelete.topic_id));
   };
 
   function ChildModal() {
     const [open, setOpen] = React.useState(false);
+    const [topicData, setTopicData] = React.useState([]);
+    const [nameTopic, setNameTopic] = React.useState('')
+    const [labelInfo, setLabelInfo] = React.useState("Informe o nome do tópico para criar");
+    const topicos = []
     const handleOpen = () => {
       setOpen(true);
+      loadTopic();
     };
     const handleClose = () => {
       setOpen(false);
+      setChipData(allTopic)
     };
-  
+
+    const loadTopic = () => {
+      index()
+        .then(res => {
+          // console.log(res)
+          res.map(data => {
+            topicos.push(data)
+          })
+          setTopicData(topicos)
+        })
+        .catch(err => console.log(err))
+    }
+
+    const onChangeNameTopic = (event) => {
+      setNameTopic(event.target.value)
+    }
+
+    const toCreated = (event) => {
+      event.preventDefault()
+      topicCreate(nameTopic)
+        .then(res => {
+          if (res == 201) {
+            loadTopic()
+            setLabelInfo('Procure esse tópico na lista de cima')
+          }
+        })
+        .catch(err => setLabelInfo(err.response.data.error))
+    }
+
+    const topicSelected = (chipToSelected) => () => {
+      allTopic.push(chipToSelected)
+    };
     return (
       <React.Fragment>
         <Button onClick={handleOpen} className="primaryStyle">Procurar Tópicos</Button>
@@ -131,11 +187,40 @@ export default function SimpleTooltips() {
           aria-labelledby="child-modal-title"
           aria-describedby="child-modal-description"
         >
-          <Box sx={{ ...style, width: 600, height:500 }}>
+          <Box sx={{ ...style, width: 600, height: 500 }}>
             <h3 id="child-modal-title" className='text-center'>Pesquise por tópicos</h3>
-            <p id="child-modal-description">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            </p>
+            <div>
+              <p>Escolha entre os tópicos existentes:</p>
+              <Paper
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  flexWrap: 'wrap',
+                  listStyle: 'none',
+                  p: 0.5,
+                  m: 0,
+                }}
+                className="paperStyle"
+                component="ul"
+              >
+                {topicData.map((data) => {
+                  return (
+                    <ListItem key={data.topic_id}>
+                      <Chip
+                        label={data.name}
+                        onClick={topicSelected(data)}
+                      />
+                    </ListItem>
+                  );
+                })}
+              </Paper>
+            </div>
+            <div>
+              <p> Não é o que busca, você pode criar seus tópicos:</p>
+              <TextField required fullWidth label={labelInfo} id="topico" value={nameTopic} onChange={onChangeNameTopic} />
+              <Button className='mt-2' variant="contained" color="primary" onClick={toCreated}>Criar</Button>
+            </div>
+
             <MdClose className='closeModal' onClick={handleClose} />
           </Box>
         </Modal>
@@ -175,7 +260,7 @@ export default function SimpleTooltips() {
             />
             {/* upload foto */}
             <div className='pt-4 pb-4'>
-              <span> Pesonalize sua sala com uma imagem que a represente: </span> &nbsp;&nbsp;
+              <span> {inputFileName ? inputFileName : 'Pesonalize sua sala com uma imagem que a represente:'} </span> &nbsp;&nbsp;
               <label htmlFor="upload-photo">
                 <ReactFileReader handleFiles={handleFiles} base64={true}>
                   <Fab
@@ -192,7 +277,7 @@ export default function SimpleTooltips() {
               </label>
             </div>
             {/* Escolher Topicos */}
-            <span> Procure tópicos que represente o tema da sua sala, tópicos ajuda usuário a encontrar sua sala! </span> <br/>
+            <span> Procure tópicos que represente o assunto da sua sala, tópicos ajuda usuários a encontrar sua sala! </span> <br />
             <ChildModal />
             {/* topics */}
             <div className='pt-4 pb-4'>
@@ -207,21 +292,25 @@ export default function SimpleTooltips() {
                 }}
                 component="ul"
               >
-                {chipData.map((data) => {
-                  return (
-                    <ListItem key={data.key}>
-                      <Chip
-                        label={data.label}
-                        onDelete={topicDelete(data)}
-                      />
-                    </ListItem>
-                  );
-                })}
+                {chipData.length > 0 ? (
+                  chipData.map((data) => {
+                    return (
+                      <ListItem key={data.topic_id}>
+                        <Chip
+                          label={data.name}
+                          onDelete={topicDelete(data)}
+                        />
+                      </ListItem>
+                    );
+                  })
+                ) : (
+                  <div></div>
+                )}
               </Paper>
             </div>
           </form>
           <Button variant="contained" color="primary" onClick={toSave}>Criar</Button>
-         
+
         </Box>
       </Modal>
     </Breadcrumbs>
