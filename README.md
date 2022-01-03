@@ -14,3 +14,5 @@ Este projeto utiliza como base a criação [Create React App](https://github.com
 - npm install @material-ui/core // material-ui-core
 - npm install @material-ui/lab // material-ui-lab
 - npm install react-file-reader --save // input-file
+- npm install --save react-draft-wysiwyg draft-js // Editor
+- npm install draftjs-to-html html-to-draftjs //Editor pegar html

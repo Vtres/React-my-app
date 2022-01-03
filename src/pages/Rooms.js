@@ -48,9 +48,6 @@ export default function Rooms() {
     }
 
     return (
-        // <div className="row pb-3 justify-content-center box-library"> 
-        //     oi RoomsByIdTopic {id}
-        // </div>
         <div className="row pb-3 justify-content-center box-library">
             {rooms.length == 0
                 ? (

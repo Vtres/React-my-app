@@ -9,7 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { MdMenu } from "react-icons/md";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MdModeEdit, MdDelete } from "react-icons/md";
+import { MdModeEdit, MdDelete,MdOutlineLogin } from "react-icons/md";
+import { FaDoorOpen } from "react-icons/fa";
 import './../assets/css/libraryCard.css';
 import { clientRoom, getClient, getClientById } from '../services/ClientService';
 import { erase } from '../services/RoomService'
@@ -62,8 +63,9 @@ export default function Library() {
       .catch(err => setClientError(err))
   }
 
-  const loadClass = (id) => {
-    history.push('/class', { id })
+  const loadClass = (id, type) => {
+    console.log(id, type)
+    history.push('/class', { id,type })
   }
   return (
     <div className="row pb-3 justify-content-center box-library">
@@ -76,7 +78,7 @@ export default function Library() {
         : room.map(data => (
           <div className="m-2 p-0 col-12 col-md-4 col-sm-6 borda" key={data.room_id}>
             <Card className={classes.root}>
-              <div className='action' >
+              <div className='action-option-two' >
                 <CardHeader
                   action={
                     <IconButton aria-label="settings">
@@ -98,26 +100,28 @@ export default function Library() {
                   </Typography>
                 </CardContent>
               </div>
-              {data.type == 'D' ? (
-                <CardActions disableSpacing>
-                  <IconButton >
-                    <MdModeEdit />
-                  </IconButton>
-                  <IconButton >
-                    <MdDelete onClick={() => {
-                      if (window.confirm('Certeza que deseja excluir?')) {
-                        onDelete(data.room_id)
-                      }
-                    }} />
-                  </IconButton>
-                </CardActions>
-              ) : (
-                <CardActions disableSpacing>
-                </CardActions>
-              )}
-              <Button className="icon-close" color="#FAFAFA" size="small" onClick={() => loadClass(data.room_id)}>
-                Entrar
-              </Button>
+              <CardActions disableSpacing>
+                {data.type == 'D' ? (
+                  <div>
+                    <IconButton >
+                      <MdModeEdit title='Editar'/>
+                    </IconButton>
+                    <IconButton >
+                      <MdDelete title='Deletar' onClick={() => {
+                        if (window.confirm('Certeza que deseja excluir?')) {
+                          onDelete(data.room_id)
+                        }
+                      }} />
+                    </IconButton>
+                  </div>
+                ) : (
+                  <CardActions disableSpacing>
+                  </CardActions>
+                )}
+                <IconButton>
+                  <FaDoorOpen onClick={() => loadClass(data.room_id, data.type)} title='Acessar'/>
+                </IconButton>
+              </CardActions>
             </Card>
           </div>
 

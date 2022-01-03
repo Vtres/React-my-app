@@ -17,6 +17,9 @@
 .action{
     cursor: pointer;
 }
+.action-option-two{
+    cursor:context-menu ;
+}
 .style-font{
     font-size: 17px !important;
     color: #262424 !important;
