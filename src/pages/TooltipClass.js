@@ -32,8 +32,8 @@ export default function SimpleTooltips() {
   const [title, setClassTile] = useState('');
   const [info, setInfo] = useState('Criar Aula')
   const history = useHistory();
-  const [id_room,setIdRoom] = useState(history.location.state.id)
-  const [type,setYpe] = useState(history.location.state.type)
+    const [id_room,setIdRoom] = useState(history.location.state.id)
+    const [type,setYpe] = useState(history.location.state.type)
 
   const createClass = () => {
     setOpen(true);
@@ -48,6 +48,7 @@ export default function SimpleTooltips() {
       setInfo('Informe um nome a sua aula')
     } else {
       postClass({title, id_room})
+      document.location.reload(true);
     }
   }
   return (

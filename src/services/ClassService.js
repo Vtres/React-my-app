@@ -9,3 +9,6 @@ export const showClassByIdRoom = async(id_room) =>{
     const response = await ApiAxios.get(`/class/${id_room}`)
     return response.data
 }
+export const deleteClassById = async(class_id) =>{
+    await ApiAxios.delete(`/class/${class_id}`)
+}

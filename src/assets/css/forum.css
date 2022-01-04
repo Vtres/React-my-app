@@ -10,6 +10,7 @@
     background-color: black !important;
     height: 3rem !important;
     width: 1px !important;
+    cursor: context-menu;
 }
 
 .box{

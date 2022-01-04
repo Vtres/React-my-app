@@ -1,14 +1,14 @@
 .editor{
-    width: 95% !important;
+    width: 100% !important;
     background-color: white;
-    padding: 0 1% 2rem 1% !important;
+    /* padding: 0 1% 2rem 1% !important; */
     height: 500px !important;
     overflow: auto;
 }
 .toolbarClassName{
     position: absolute !important;
     z-index: 5;
-    width: 85% !important;
+    width: 90% !important;
 }
 .editorClassName{
     padding-top: 5rem;

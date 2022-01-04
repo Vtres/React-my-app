@@ -4,7 +4,7 @@ import Drawer from './Drawer';
 import Forum from './Forum';
 import TooltipForum from './TooltipRoom'
 
-export default function Dashboard() {
+export default function Forumm() {
 
     return (
         <div>

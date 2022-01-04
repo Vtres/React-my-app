@@ -1,12 +1,36 @@
 .class{
-    width: 70%;
+    width: 60%;
     text-align: center;
 }
 
+.btn-actions{
+    z-index: 2;
+}
+.grid-data{
+    cursor: context-menu;
+}
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+    padding: 0!important;
+    width: 60%
+}
 .grid-title{
-    width: 80%;
+    cursor: pointer!important;
+}
+.MuiGrid-spacing-xs-2{
+    cursor: context-menu;
 }
 
-.grid-data{
-    width: 20%;
+.divider-class{
+    color: rgb(0, 0, 0);
+    background-color: black !important;
+    height: 5rem !important;
+    width: 1px !important;
+    cursor: context-menu;
+}
+@media (max-width: 768px) {
+    
+    .class{
+        width: 100%;
+    }
+  
 }

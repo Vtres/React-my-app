@@ -18,6 +18,11 @@
     background-color: #349354 !important;
     color:#FFF !important;
 }
+.create-content{
+    background-color: #fcba03 !important;
+    color:#FFF !important;
+}
+
 .closeModal{
     position: absolute;
     right: 10px;

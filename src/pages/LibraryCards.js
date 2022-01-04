@@ -103,12 +103,12 @@ export default function Library() {
               <CardActions disableSpacing>
                 {data.type == 'D' ? (
                   <div>
-                    <IconButton >
+                    {/* <IconButton >
                       <MdModeEdit title='Editar'/>
-                    </IconButton>
+                    </IconButton> */}
                     <IconButton >
                       <MdDelete title='Deletar' onClick={() => {
-                        if (window.confirm('Certeza que deseja excluir?')) {
+                        if (window.confirm('Certeza que deseja ocultar a sala? Nenhum dos integrantes poderá estudar!')) {
                           onDelete(data.room_id)
                         }
                       }} />
