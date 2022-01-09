@@ -5,19 +5,15 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import '../assets/css/tooltip.css';
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { postClass } from '../services/ClassService'
-import { useHistory } from "react-router-dom";
-import Editorr from './Editor';
 import { EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import '../assets/css/editor.css';
+import { create } from '../services/ContentService';
 
 const style = {
     position: 'absolute',
@@ -35,26 +31,46 @@ const style = {
 export default function TooltipContent() {
 
     const [open, setOpen] = React.useState(false);
-    const handleClose = () => setOpen(false);
+    const [param, setParam] = React.useState(window.location.search.substr(1).split('&'));
+    const [type, setType] = React.useState(localStorage.getItem('type'));
     const [editorState, setEditor] = useState(EditorState.createEmpty())
+
+    const handleClose = () => setOpen(false);
     const onEditorStateChange = (editorState) => {
-      setEditor(editorState);
-      // event.target.value
+        setEditor(editorState);
+        // event.target.value
     };
     const createClass = () => {
         setOpen(true);
     }
 
-    //   const toSave = () => {
-    //     if (title.length == 0) {
-    //       setInfo('Informe um nome a sua aula')
-    //     } else {
-    //       postClass({title, id_room})
-    //       document.location.reload(true);
-    //     }
-    //   }
     const toCreate = () => {
-        console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+        var action = 'N';
+        var text = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+        var id_class = param[0]
+        create({text,id_class,action})
+            .then(res=>{
+                console.log(res)
+                setOpen(false)
+                window.location.reload();
+            })
+            .catch(erro =>{
+                console.log(erro)
+            })
+    }
+    const toJoin=()=>{
+        var action = 'J';
+        var text = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+        var id_class = param[0]
+        create({text,id_class,action})
+            .then(res=>{
+                console.log(res)
+                setOpen(false)
+                window.location.reload();
+            })
+            .catch(erro =>{
+                console.log(erro)
+            })
     }
     return (
         <Breadcrumbs aria-label="breadcrumb">
@@ -79,11 +95,19 @@ export default function TooltipContent() {
                             className='style-menu-editor'
                             onEditorStateChange={onEditorStateChange}
                         />
-                        
+
                     </div>
 
-                    <Button variant="contained" color="primary" onClick={toCreate}>Finalizar e Salvar</Button>
-
+                    <Button variant="contained" color="primary" onClick={() => {
+                        if (window.confirm('Essa opção salva esse conteúdo e substitui todo conteúdo preexistente!')) {
+                            toCreate()
+                        }
+                    }}>Finalizar e Salvar</Button> &nbsp;&nbsp;&nbsp;
+                    <Button variant="contained" color="primary" onClick={() => {
+                        if (window.confirm('Essa opção irá juntar esse conteúdo com o todo conteúdo preexistente!')) {
+                            toJoin()
+                        }
+                    }}>Juntar esse Conteúdo</Button>
                 </Box>
             </Modal>
         </Breadcrumbs>

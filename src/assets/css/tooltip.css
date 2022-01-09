@@ -21,6 +21,15 @@
 .create-content{
     background-color: #fcba03 !important;
     color:#FFF !important;
+    
+}
+
+.create-file{
+    background-color: #761472 !important;
+    color:#FFF !important;
+    right: 82px !important;
+    bottom: 16px !important;
+    position: fixed !important;
 }
 
 .closeModal{

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { list, create } from '../services/ContentService';
-import Editorr from './Editor'
+import { list } from '../services/ContentService';
+import moment from 'moment';
+import ContentFile from './ContentFile'
 
 export default function Content() {
     var params = window.location.search.substr(1).split('&');
@@ -9,12 +10,12 @@ export default function Content() {
     useEffect(() => {
         list(params)
             .then(res => {
-                console.log('then')
+                console.log(res)
                 // setData(res)
-                if(res.description_contents != undefined){
-                    document.getElementById('conteudo').innerHTML = res.description_contents
-                }
-               
+                setData(res.date_contents)
+                document.getElementById('conteudo').innerHTML = res.description_contents
+
+
             })
             .catch(err => {
                 console.log(err)
@@ -23,13 +24,10 @@ export default function Content() {
     }, [])
     return (
         <div className="row pb-3 justify-content-center box-library">
-
+            <span>Conteúdo criado em: {moment(data).format("DD/MM/YYYY")}</span>
             <div id='conteudo'>
             </div>
-
-            {/* <Editorr />
-
-            oi {params} */}
+            
         </div>
 
     )
