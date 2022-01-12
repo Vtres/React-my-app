@@ -1,7 +1,10 @@
 .borda{
     max-width: 18rem !important;
 }
-
+.spanid{
+    font-style: italic;
+    margin-left: auto;
+}
 .box-library{
     padding-left: 90px !important;   
 }

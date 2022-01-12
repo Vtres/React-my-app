@@ -3,6 +3,7 @@ import InputBase from '@material-ui/core/InputBase';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { FaSearch } from "react-icons/fa";
 import '../assets/css/search.css';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,12 +64,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  const [id_room, setIdRoom] = useState('')
+  const [data, setData] = useState('')
+  const history = useHistory();
 
-  
   const popover = (event) => {
     if (event.key === 'Enter') {
-      console.log('enter')
+      if(!isNaN(parseFloat(id_room)) && isFinite(id_room)){
+        console.log('enter')
+        // history.push('/room-id', {id_room})
+        localStorage.setItem('room-id', id_room)
+        window.location.href = "http://localhost:3000/room-id/?"+id_room;
+      }
     }
+  }
+
+  const onChangeSearch=(event)=>{
+    setIdRoom(event.target.value)
   }
   
   return (
@@ -78,11 +90,13 @@ export default function SearchAppBar() {
           <FaSearch />
         </div>
         <InputBase
-          placeholder="Pesquisar salas"
+          placeholder="Pesquisar salas (ID)"
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput,
           }}
+          value={id_room}
+          onChange={onChangeSearch}
           onKeyDown={popover}
           inputProps={{ 'aria-label': 'search' }}
         />

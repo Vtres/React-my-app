@@ -20,6 +20,7 @@ import PageSearch from './pages/PageSearch'
 // import Drawer from './pages/Drawer';
 import PageClass from './pages/PageClass';
 import PageRooms from './pages/PageRooms';
+import PageId from './pages/PageId';
 import PageContent from './pages/PageContent'
 export default function App() {
     return (
@@ -45,6 +46,7 @@ export default function App() {
                 <Route exact path="/searchRoom" > <PageSearch/> </Route>
                 <Route exact path="/class" > <PageClass/> </Route>
                 <Route path="/content"> <PageContent/> </Route>
+                <Route path="/room-id"> <PageId/> </Route>
                 <Route exact path="/show-rooms" > <PageRooms/> </Route>
 
                 

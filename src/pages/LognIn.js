@@ -54,7 +54,11 @@ export default function LognIn() {
                     setPass('')
                     setOpen(true);
                 }
-            }).catch(err=>console.log(err))
+            }).catch(err=>{
+                console.log(err)
+                setMessage('Email ou Senha Inválidos')
+                setOpen(true);
+            })
             // postSignIn({ email, senha }).then(response => {
             //     if (response.data[0]) {
             //         checkToken(response.data[0]).then(res => {

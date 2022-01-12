@@ -21,3 +21,13 @@ export const create = async ({name, description_room, nome, result, id_user, id_
     const response = await ApiAxios.post('/room',{name, description_room, nome, result, id_user, id_public, topic},headers)
     return response.data
 }
+
+export const searchRoom = async(id)=>{
+    const response = await ApiAxios.get(`/room/${id}`,headers)
+    return response.data
+}
+
+export const join = async({id_user,id_room})=>{
+    const response = await ApiAxios.post(`/room/join/`,{id_user,id_room}, headers)
+    return response.data
+}

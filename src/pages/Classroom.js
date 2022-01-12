@@ -49,7 +49,7 @@ export default function Classroom() {
             {
                 classe.length == 0
                     ? (
-                        <div>sem aualas</div>
+                        <div>sem aulas</div>
                         // <Error />
                     )
                     : classe.map(p => (

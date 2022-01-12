@@ -7,15 +7,14 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { MdMenu } from "react-icons/md";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { MdModeEdit, MdDelete,MdOutlineLogin } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { FaDoorOpen } from "react-icons/fa";
 import './../assets/css/libraryCard.css';
-import { clientRoom, getClient, getClientById } from '../services/ClientService';
-import { erase } from '../services/RoomService'
+import { clientRoom } from '../services/ClientService';
+// import { erase } from '../services/RoomService'
+import {exit} from '../services/ClientRoomService'
 import moment from 'moment';
-import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Library() {
   // const history = createHashHistory()
   const classes = useStyles();
@@ -49,6 +49,7 @@ export default function Library() {
     const user_id = localStorage.getItem('user-id')
     clientRoom(user_id)
       .then(res => {
+        console.log(res)
         setRoom(res)
       })
       .catch(err => {
@@ -56,16 +57,16 @@ export default function Library() {
       })
   }
   const onDelete = (room_id) => {
-    erase(room_id)
-      .then((res) => {
-        loadCard()
+    exit(room_id)
+      .then(res => {
+        document.location.reload(true);
       })
       .catch(err => setClientError(err))
   }
 
   const loadClass = (id, type) => {
     console.log(id, type)
-    history.push('/class', { id,type })
+    history.push('/class', { id, type })
   }
   return (
     <div className="row pb-3 justify-content-center box-library">
@@ -80,11 +81,6 @@ export default function Library() {
             <Card className={classes.root}>
               <div className='action-option-two' >
                 <CardHeader
-                  action={
-                    <IconButton aria-label="settings">
-                      <BiDotsVerticalRounded />
-                    </IconButton>
-                  }
                   title={data.name}
                   subheader={moment(data.date).format("DD/MM/YYYY")}
                 />
@@ -101,14 +97,14 @@ export default function Library() {
                 </CardContent>
               </div>
               <CardActions disableSpacing>
-                {data.type == 'D' ? (
+                {data.type != 'D' ? (
                   <div>
                     {/* <IconButton >
                       <MdModeEdit title='Editar'/>
                     </IconButton> */}
                     <IconButton >
-                      <MdDelete title='Deletar' onClick={() => {
-                        if (window.confirm('Certeza que deseja ocultar a sala? Nenhum dos integrantes poderá estudar!')) {
+                      <MdDelete title='Sair' onClick={() => {
+                        if (window.confirm('Confirme se deseja sair dessa Sala de aula!')) {
                           onDelete(data.room_id)
                         }
                       }} />
@@ -119,8 +115,9 @@ export default function Library() {
                   </CardActions>
                 )}
                 <IconButton>
-                  <FaDoorOpen onClick={() => loadClass(data.room_id, data.type)} title='Acessar'/>
+                  <FaDoorOpen onClick={() => loadClass(data.room_id, data.type)} title='Acessar' />
                 </IconButton>
+                {data.type == 'D' ? ( <span className='spanid'>ID Rooom: {data.room_id}</span> ):null}
               </CardActions>
             </Card>
           </div>

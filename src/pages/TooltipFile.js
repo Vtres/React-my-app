@@ -7,13 +7,13 @@ import '../assets/css/tooltip.css';
 import Box from '@material-ui/core/Box';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import '../assets/css/editor.css';
 import '../assets/css/tooltip.css';
 import { FaUpload } from "react-icons/fa";
 import ReactFileReader from 'react-file-reader';
+import { createFile } from '../services/ContentService';
 
 const style = {
     position: 'absolute',
@@ -31,27 +31,34 @@ export default function TooltipFile() {
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => setOpen(false);
-    const [editorState, setEditor] = useState(EditorState.createEmpty())
     const [inputFileName, setInputName] = useState('');
+    const [nameFile, setNameFile] = useState('')
+    const [result, setResult] = useState('')
+    const [param, setParam] = React.useState(window.location.search.substr(1).split('&'));
 
-    const onEditorStateChange = (editorState) => {
-        setEditor(editorState);
-        // event.target.value
-    };
     const createClass = () => {
         setOpen(true);
     }
 
     const toCreate = () => {
-        console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
+        
+
     }
     const handleFiles = files => {
         setInputName('Arquivo: ' + files.fileList[0].name + " escolhido")
-        console.log(files.base64)
-        console.log(files.fileList[0].name)
+        setResult(files.base64)
+        setNameFile(files.fileList[0].name)
     }
     const toSave = () =>{
-        console.log('ko')
+        var id_class = param[0]
+        createFile({id_class,nameFile,result})
+            .then(res=>{
+                setOpen(false)
+                window.location.reload();
+            })
+            .catch(erro =>{
+                console.log(erro)
+            })
     }
     return (
         <Breadcrumbs aria-label="breadcrumb">

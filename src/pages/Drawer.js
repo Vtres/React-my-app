@@ -126,7 +126,7 @@ export default function MiniDrawer() {
 
           <div className="jss10"></div>
           <Search className="searchCustom" />
-          <Notification />
+          {/* <Notification /> */}
           <Avatar />
 
         </Toolbar>
