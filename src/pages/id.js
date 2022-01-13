@@ -4,9 +4,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import Button from '@material-ui/core/Button';
 import { searchRoom } from '../services/RoomService';
 import { join } from '../services/RoomService';
@@ -20,16 +18,14 @@ export default function PageId() {
 
     useEffect(() => {
         serachRoomById()
-    }, [])
+    })
 
     const serachRoomById = () => {
         var id = id_room[0]
         searchRoom(id)
             .then(res => {
-                console.log(res)
                 setData(res[0])
                 setMessage('')
-                console.log(res)
             })
             .catch(err => {
                 console.log(err)
@@ -51,7 +47,7 @@ export default function PageId() {
     }
     return (
         <div className="row pb-3 justify-content-center box-library">
-            {data.length == 0 ? (
+            {data.length === 0 ? (
                 <div className="row pb-3 justify-content-center box-library">
                     {message}
                 </div>
@@ -60,7 +56,7 @@ export default function PageId() {
                     <Card >
                         <div className='action-option-two' >
                             <CardHeader
-                                title={data.name != undefined ? data.name : ''}
+                                title={data.name !== undefined ? data.name : ''}
                                 subheader={moment(data.date).format("DD/MM/YYYY")}
                             />
                             <CardMedia
@@ -75,7 +71,7 @@ export default function PageId() {
                             </CardContent>
                         </div>
                         <CardActions disableSpacing>
-                            {localStorage.getItem('user-id') != data.dono ? (
+                            {localStorage.getItem('user-id') !== data.dono ? (
                                 <Button className="icon-close" color="#FAFAFA" size="small" onClick={() => joinUser(data.room_id)} >
                                     Juntar-se a sala
                                 </Button>

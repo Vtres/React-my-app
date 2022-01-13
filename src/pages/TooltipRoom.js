@@ -1,5 +1,4 @@
 import React, { useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { GrAdd } from "react-icons/gr";
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -18,23 +17,8 @@ import { styled } from '@material-ui/core/styles';
 import { index, topicCreate } from '../services/TopicService';
 import { create } from '../services/RoomService';
 import { MdClose } from "react-icons/md";
-
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
-const useStyles = makeStyles((theme) => ({
-  fab: {
-    margin: theme.spacing(2),
-  },
-  absolute: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(3),
-  },
-  perfil: {
-    backgroundColor: '#f44336',
-    color: '#FFF',
-  },
-}));
 const style = {
   position: 'absolute',
   top: '50%',
@@ -54,7 +38,6 @@ const ListItem = styled('li')(({ theme }) => ({
 }));
 
 export default function SimpleTooltips() {
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const [openModalTopic, setOpenModalTopic] = React.useState(false);
@@ -88,10 +71,6 @@ export default function SimpleTooltips() {
     chipData.map(data => {
       topic.push(data.name)
     })
-    // console.log(room)
-    // console.log(description)
-    // console.log(inputFileResult)
-    // console.log(inputFileName)
 
     const name = room
     const description_room = description
@@ -109,23 +88,9 @@ export default function SimpleTooltips() {
       .catch(err => console.log(err))
   }
 
-  const searchTopic = () => {
-    setOpenModalTopic(true);
-  }
-
-
   // Tópicos
   const [chipData, setChipData] = React.useState([]);
   const allTopic = []
-  // { key: 0, label: 'Angular' },
-  // { key: 1, label: 'jQuery' },
-  // { key: 2, label: 'Polymer' },
-  // { key: 3, label: 'React' },
-  // { key: 4, label: 'Vue.js' },
-  // { key: 5, label: 'CodeIgniter' },
-  // { key: 6, label: 'ReactNative' },
-  // { key: 7, label: 'C++' },
-  // { key: 8, label: 'Python' },
 
   const topicDelete = (chipToDelete) => () => {
     setChipData((chips) => chips.filter((chip) => chip.topic_id !== chipToDelete.topic_id));

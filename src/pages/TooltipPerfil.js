@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { GrAdd } from "react-icons/gr";
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import { RiChatNewLine, RiUserFollowFill } from "react-icons/ri";
+import { RiUserFollowFill } from "react-icons/ri";
 import '../assets/css/tooltip.css';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -13,25 +10,8 @@ import TextField from '@material-ui/core/TextField';
 import { FaUpload } from "react-icons/fa";
 import ReactFileReader from 'react-file-reader';
 import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import Paper from '@material-ui/core/Paper';
-import { styled } from '@material-ui/core/styles';
 import { getClientById, putClient } from '../services/ClientService'
 
-const useStyles = makeStyles((theme) => ({
-    fab: {
-        margin: theme.spacing(2),
-    },
-    absolute: {
-        position: 'fixed',
-        bottom: theme.spacing(2),
-        right: theme.spacing(3),
-    },
-    perfil: {
-        backgroundColor: '#f44336',
-        color: '#FFF',
-    },
-}));
 const style = {
     position: 'absolute',
     top: '50%',
@@ -83,9 +63,6 @@ export default function TooltopPerfil() {
 
     const toUpdate = (event) => {
         event.preventDefault()
-        console.log(name)
-        console.log(surname)
-        console.log(email)
         var nome = inputFileProfile
         var result = inputFileResultProfile
         putClient(user_id, {name,surname,email,nome,result})

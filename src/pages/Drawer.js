@@ -9,19 +9,16 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import { MdMenu } from "react-icons/md";
-import { BiChat } from "react-icons/bi";
 import Link from '@material-ui/core/Link';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { GiBookshelf } from "react-icons/gi";
 import Avatar from './Avatar';
 import '../assets/css/drawer.css';
 import Search from './Search';
-import Notification from './Notification';
 import Box from '@material-ui/core/Box';
 import { GoSearch } from "react-icons/go";
-import {MdDashboard,MdSearch,MdForum } from "react-icons/md";
+import {MdDashboard,MdForum } from "react-icons/md";
  
 const drawerWidth = 240;
 

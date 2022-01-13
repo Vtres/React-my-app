@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { BiDotsVerticalRounded } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { FaDoorOpen } from "react-icons/fa";
 import './../assets/css/libraryCard.css';

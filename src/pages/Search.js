@@ -3,7 +3,6 @@ import InputBase from '@material-ui/core/InputBase';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import { FaSearch } from "react-icons/fa";
 import '../assets/css/search.css';
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,8 +64,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
   const [id_room, setIdRoom] = useState('')
-  const [data, setData] = useState('')
-  const history = useHistory();
 
   const popover = (event) => {
     if (event.key === 'Enter') {
