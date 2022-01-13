@@ -16,6 +16,8 @@ import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import { styled } from '@material-ui/core/styles';
+import { getClientById, putClient } from '../services/ClientService'
+
 const useStyles = makeStyles((theme) => ({
     fab: {
         margin: theme.spacing(2),
@@ -47,8 +49,6 @@ export default function TooltopPerfil() {
     const [open, setOpen] = React.useState(false);
     const handleClose = () => setOpen(false);
 
-
-    
     // PROFILE
     const [inputFileProfile, setInputProfile] = useState('Trocar foto de perfil:');
     const [inputFileResultProfile, setInputResultProfile] = useState('');
@@ -56,6 +56,8 @@ export default function TooltopPerfil() {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
+    const { user_id } = localStorage.getItem('user-id')
+
 
     const handleFilesProfile = files => {
         setInputResultProfile(files.base64)
@@ -73,19 +75,42 @@ export default function TooltopPerfil() {
         setEmail(event.target.value)
     }
 
-    const onChangePass = (event) => {
-        setPass(event.target.value)
-    }
-
     const createProfile = () => {
         setOpen(true);
+        loadInfo()
     }
 
 
     const toUpdate = (event) => {
         event.preventDefault()
+        console.log(name)
+        console.log(surname)
+        console.log(email)
+        var nome = inputFileProfile
+        var result = inputFileResultProfile
+        putClient(user_id, {name,surname,email,nome,result})
+        .then(() => {
+            document.location.reload(true);
+        })
+        .catch(err => console.log(err))
     }
 
+    useEffect(() => {
+        loadInfo()
+
+    }, [])
+
+    const loadInfo = () => {
+        const user_id = localStorage.getItem('user-id')
+        getClientById(user_id)
+            .then(res => {
+                console.log(res);
+                setName(res.name)
+                setSurname(res.surname)
+                setEmail(res.email)
+                setPass(res.senha)
+            }).catch(err => console.log(err))
+    }
 
     return (
         <div>
@@ -113,9 +138,6 @@ export default function TooltopPerfil() {
                         </div>
                         <div className='pt-2 pb-2'>
                             <TextField fullWidth label="email" id="email" value={email} onChange={onChangeEmail} />
-                        </div>
-                        <div className='pt-2 pb-2'>
-                            <TextField fullWidth label="password" id="password" value={password} onChange={onChangePass} />
                         </div>
                         <div className='pt-2 pb-2'>
                             <span value={inputFileProfile}> {inputFileProfile} </span> &nbsp;&nbsp;

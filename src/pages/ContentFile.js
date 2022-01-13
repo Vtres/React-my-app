@@ -38,6 +38,7 @@ export default function ContentFile() {
     var params = window.location.search.substr(1).split('&');
     const [file, setFile] = useState([])
     const [status, setStatus] = useState(false)
+    const type = localStorage.getItem('type')
     var dados = [];
     useEffect(() => {
         listFile(params)
@@ -54,21 +55,19 @@ export default function ContentFile() {
     }, [])
 
     const baixar = (result, nome) => {
-        download(nome, result);
-    }
-    const download = (nome, result) => {
         var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8, ' + encodeURIComponent(result));
+        element.setAttribute('href', (result));
         element.setAttribute('download', nome);
         document.body.appendChild(element);
         element.click();
     }
-    const handleDelete = (id)=>{
+
+    const handleDelete = (id) => {
         destroy(id)
-            .then(res=>{
+            .then(res => {
                 window.location.reload();
             })
-            .catch(error=>console.log(error))
+            .catch(error => console.log(error))
     }
     return (
 
@@ -85,8 +84,7 @@ export default function ContentFile() {
                             rel="noopener noreferrer"
                             label={c.nome}
                             onClick={() => baixar(c.result, c.nome)}
-                            onDelete={()=>handleDelete(c.id)}
-
+                            onDelete={type == 'D' ? () => handleDelete(c.id) : null}
                         />
                     </ListItem>
 

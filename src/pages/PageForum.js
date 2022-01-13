@@ -2,7 +2,7 @@ import React from 'react';
 
 import Drawer from './Drawer';
 import Forum from './Forum';
-import TooltipForum from './TooltipRoom'
+import TooltipForum from './TooltipForum'
 
 export default function Forumm() {
 

@@ -40,17 +40,15 @@ export default function TooltipFile() {
         setOpen(true);
     }
 
-    const toCreate = () => {
-        
-
-    }
     const handleFiles = files => {
         setInputName('Arquivo: ' + files.fileList[0].name + " escolhido")
+        console.log(files)
         setResult(files.base64)
         setNameFile(files.fileList[0].name)
     }
     const toSave = () =>{
         var id_class = param[0]
+        console.log(result)
         createFile({id_class,nameFile,result})
             .then(res=>{
                 setOpen(false)

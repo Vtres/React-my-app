@@ -252,11 +252,12 @@ export default function SimpleTooltips() {
             {/* Description */}
             <TextareaAutosize
               aria-label="empty textarea"
+              maxRows={4}
               minRows={3}
               placeholder="Descrição da sala"
               value={description}
               onChange={onChangeDescription}
-              style={{ width: '100%' }}
+              style={{ width: '100%',maxHeight:'150px' }}
             />
             {/* upload foto */}
             <div className='pt-4 pb-4'>

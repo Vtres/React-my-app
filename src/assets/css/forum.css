@@ -19,3 +19,24 @@
     padding-left: 100px !important;
     padding-right: 30px !important;
 }
+
+.paper-owner{
+    width: 85%;
+    margin:0;
+    margin-bottom: 1.2rem;
+}
+
+.descriptionComment{
+    position: relative;
+    margin-top: 1rem !important;
+}
+
+.paper-comment{
+    margin-bottom: 1.2rem;
+}
+
+.box-comment{
+    position: absolute;
+    right: 0;
+    width: 85%;
+}

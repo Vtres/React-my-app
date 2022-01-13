@@ -6,6 +6,7 @@ import ContentFile from './ContentFile'
 export default function Content() {
     var params = window.location.search.substr(1).split('&');
     const [data, setData] = useState('')
+    const [controll, setControll] = useState()
     var typeUser = localStorage.getItem('item')
     useEffect(() => {
         list(params)
@@ -13,7 +14,11 @@ export default function Content() {
                 console.log(res)
                 // setData(res)
                 setData(res.date_contents)
-                document.getElementById('conteudo').innerHTML = res.description_contents
+                setControll(res.description_contents)
+                if (res.description_contents) {
+                    document.getElementById('conteudo').innerHTML = res.description_contents
+                }
+
 
 
             })
@@ -27,7 +32,6 @@ export default function Content() {
             <span>Conteúdo criado em: {moment(data).format("DD/MM/YYYY")}</span>
             <div id='conteudo'>
             </div>
-            
         </div>
 
     )

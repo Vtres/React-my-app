@@ -22,6 +22,7 @@ import PageClass from './pages/PageClass';
 import PageRooms from './pages/PageRooms';
 import PageId from './pages/PageId';
 import PageContent from './pages/PageContent'
+import PageComment from './pages/PageComment'
 export default function App() {
     return (
         <BrowserRouter>
@@ -47,6 +48,7 @@ export default function App() {
                 <Route exact path="/class" > <PageClass/> </Route>
                 <Route path="/content"> <PageContent/> </Route>
                 <Route path="/room-id"> <PageId/> </Route>
+                <Route path="/comment"> <PageComment/> </Route>
                 <Route exact path="/show-rooms" > <PageRooms/> </Route>
 
                 

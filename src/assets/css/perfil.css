@@ -7,3 +7,10 @@
 .title-perfil{
     text-align: center !important;
 }
+
+.icon-perfil{
+    font-size:10em;
+    margin: 0 auto;
+    right: 10%;
+    position: absolute;
+}

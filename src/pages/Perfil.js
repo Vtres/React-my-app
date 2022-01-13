@@ -4,8 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import { styled } from '@material-ui/core/styles';
 import './../assets/css/perfil.css';
 import { Typography } from '@material-ui/core';
-import { getClientById } from '../services/ClientService';
+import { getClientById, imgClient } from '../services/ClientService';
 import moment from 'moment';
+import { MdAccountCircle } from "react-icons/md";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -18,10 +19,11 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Perfil({ history }) {
     const [client, setClient] = useState([])
     const [clientError, setClientError] = useState('')
+    const [img, setImg] = useState('')
 
     useEffect(() => {
         loadInfo()
-        
+        loadImg()
     }, [])
 
     const loadInfo = () => {
@@ -29,7 +31,15 @@ export default function Perfil({ history }) {
         getClientById(user_id)
             .then(res => {
                 setClient(res);
-                console.log(client);
+                console.log('perfil', client);
+            }).catch(err => setClientError(err))
+    }
+
+    const loadImg = () => {
+        const user_id = localStorage.getItem('user-id')
+        imgClient(user_id)
+            .then(res => {
+                setImg(res);
             }).catch(err => setClientError(err))
     }
     return (
@@ -48,16 +58,24 @@ export default function Perfil({ history }) {
                         <Typography>Email cadastrado: {client.email}</Typography>
                         <Typography>Nome completo informado: {client.name} {client.surname}</Typography>
                     </Item>
-                    <Item className="mt-2">
+                    {/* <Item className="mt-2">
                         <h4 >Informações Extras:</h4>
                         <Typography>Total de salas: 12 salas</Typography>
                         <Typography>Você é dono de 3 salas</Typography>
                         <Typography>Você está participando de 9 salas</Typography>
-                    </Item>
+                    </Item> */}
 
                 </Grid>
                 <Grid itemxs={12} sm={6} md={4}>
-                    <img src={`${process.env.PUBLIC_URL}/image/perfil.jpg`} className="img-perfil"></img>
+                    {img ? (
+                        <img src={img.result} alt={img.nome} className="img-perfil"></img>
+                    ) : (
+                        <div className="icon-perfil">
+                            <MdAccountCircle />
+                        </div>
+
+                    )}
+
                 </Grid>
             </Grid>
         </div>

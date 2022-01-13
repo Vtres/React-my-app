@@ -7,18 +7,21 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import '../assets/css/forum.css';
-import { getPost } from '../services/PostService'
+import { getOwnerPost } from '../services/PostService'
 import moment from 'moment';
+import { Divider } from '@material-ui/core';
 
 export default function Forum() {
     const [post, setPost] = useState('');
     const [postError, setPostError] = useState('')
+    var params = window.location.search.substr(1).split('&');
+
     useEffect(() => {
         loadPost()
     }, [])
 
     const loadPost = () => {
-        getPost()
+        getOwnerPost(params)
             .then(res => {
                 console.log(res)
                 setPost(res)
@@ -27,29 +30,33 @@ export default function Forum() {
                 setPostError(err)
             })
     }
-    const lookPost = (id_post) => {
-        window.location.href = "http://localhost:3000/comment/?" + id_post;
-    }
+
     return (
         <Box className='box'>
             {post.length == 0 ? null :
-                post.map(p => (
-                    <Paper className='paper' onClick={() => lookPost(p.post_id)} key={p.post_id}>
+                (
+                    <Paper className='paper-owner' key={post.post_id}>
                         <ListItem alignItems="flex-start">
                             <ListItemAvatar>
-                                <Avatar alt={p.name_user + p.surname}  />
+                                <Avatar alt={post.name + " " + post.surname} />
                             </ListItemAvatar>
                             <ListItemText
-                                primary={p.title}
+                                primary={post.title}
                                 secondary={
                                     <React.Fragment>
-                                        <Typography noWrap>{p.name_user + " " + p.surname} - {moment(p.date_post).format("DD/MM/YYYY")}</Typography>
+                                        <Typography noWrap>{post.name + " " + post.surname} - {moment(post.date_post).format("DD/MM/YYYY")}</Typography>
+                                        <Divider className="divider-owner" />
+                                        <p className='descriptionComment"'>{post.description_post}</p>
+                                        {post.result ? (
+                                            <img alt="Minha Figura" src={post.result ? post.result : null} />
+                                        ) : null}
+
                                     </React.Fragment>
                                 }
                             />
                         </ListItem>
                     </Paper>
-                ))}
+                )}
         </Box >
     );
 }

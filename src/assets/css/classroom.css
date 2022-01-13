@@ -27,6 +27,14 @@
     width: 1px !important;
     cursor: context-menu;
 }
+
+.divider-owner{
+    color: rgb(0, 0, 0);
+    background-color: black !important;
+    margin: 6px 0 !important;
+    height: 2px !important;
+    width: 100% !important;
+}
 @media (max-width: 768px) {
     
     .class{

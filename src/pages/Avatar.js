@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useHistory } from "react-router-dom";
 import Link from '@material-ui/core/Link';
 import { NavLink } from 'react-router-dom';
+import { imgClient } from '../services/ClientService';
+import { MdAccountCircle } from "react-icons/md";
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -52,15 +54,17 @@ const useStyles = makeStyles((theme) => ({
 export default function BadgeAvatars() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const history = useHistory();
-
+    const [img, setImg] = React.useState('')
     useEffect(() => {
         loadAvatar()
     }, [])
 
     const loadAvatar = () => {
         const user_id = localStorage.getItem('user-id')
-        console.log(user_id)// trabalhar aki 
+        imgClient(user_id)
+        .then(res => {
+            setImg(res);
+        }).catch(err => console.log(err))
     }
 
     const handleClick = (event) => {
@@ -91,7 +95,7 @@ export default function BadgeAvatars() {
                 title='Perfil'
             >
 
-                <Avatar alt="Perfil" src={`${process.env.PUBLIC_URL}/image/perfil.jpg`} className={classes.large} onClick={handleClick} />
+                <Avatar alt="Perfil" src={img? img.result: <MdAccountCircle/>} className={classes.large} onClick={handleClick} />
                 <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
